@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:stylish_shop/Components/button1.dart';
 
 class Gender extends StatelessWidget {
@@ -12,6 +13,10 @@ class Gender extends StatelessWidget {
         body: Column(
           children: [
             Spacer(),
+            Container(
+                alignment: Alignment.topCenter,
+                child: Lottie.asset(
+                    'assets/animations/Animation - 1741816529994.json')),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 20),
               height: 244,
@@ -60,9 +65,10 @@ class Gender extends StatelessWidget {
                       margin: EdgeInsets.only(top: 18),
                       child: Text(
                         'Skip',
-                        style: TextStyle(color: Color(0xff8F959E), fontSize: 17),
+                        style:
+                            TextStyle(color: Color(0xff8F959E), fontSize: 17),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
