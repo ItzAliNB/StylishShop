@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stylish_shop/Components/button1.dart';
 
 class Gender extends StatelessWidget {
   const Gender({super.key});
@@ -20,7 +21,49 @@ class Gender extends StatelessWidget {
               ),
               child: Center(
                 child: Column(
-                  children: [Text('Look Good, Feel Good')],
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      child: Text(
+                        'Look Good, Feel Good',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 25),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 40),
+                      child: Text(
+                        'Create your individual & unique style and look amazing everyday.',
+                        style: TextStyle(
+                            color: Color(0xff8F959E),
+                            fontWeight: FontWeight.w400),
+                        textAlign: TextAlign.center,
+                        textWidthBasis: TextWidthBasis.parent,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Button1(
+                          color: Color(0xffF5F6FA),
+                          text: 'Women',
+                          colortext: Color(0xff8F959E),
+                        ),
+                        Button1(
+                          color: Color(0xff9775FA),
+                          text: 'Men',
+                          colortext: Color(0xffFFFFFF),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 18),
+                      child: Text(
+                        'Skip',
+                        style: TextStyle(color: Color(0xff8F959E), fontSize: 17),
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
