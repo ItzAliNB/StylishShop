@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stylish_shop/Components/textinput.dart';
 import 'package:stylish_shop/Verify/gender.dart';
-import 'package:stylish_shop/home.dart';
 
 class Signin extends StatelessWidget {
   const Signin({super.key});
