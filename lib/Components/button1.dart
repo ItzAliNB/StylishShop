@@ -11,7 +11,6 @@ class Button1 extends StatelessWidget {
   final Color color;
   final Color colortext;
   final String text;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,7 +21,7 @@ class Button1 extends StatelessWidget {
         );
       },
       child: Container(
-        margin: EdgeInsets.only(top: 20),
+        margin: EdgeInsets.only(top: 15),
         width: 152,
         height: 60,
         decoration: BoxDecoration(

@@ -47,7 +47,7 @@ class _HomeScreenState extends State<Home> {
         backgroundColor: const Color(0xffFEFEFE),
         actions: [
           Container(
-            margin: const EdgeInsets.only(right: 15, top: 15),
+            margin: const EdgeInsets.only(right: 15, top: 5),
             child: CircleAvatar(
               backgroundColor: const Color(0xffF5F6FA),
               child: IconButton(
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<Home> {
           )
         ],
         leading: Container(
-          margin: const EdgeInsets.only(left: 15, top: 15),
+          margin: const EdgeInsets.only(left: 15, top: 5),
           child: CircleAvatar(
             backgroundColor: const Color(0xffF5F6FA),
             child: IconButton(
