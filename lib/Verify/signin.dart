@@ -57,10 +57,10 @@ class Signin extends StatelessWidget {
               },
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 20),
-                height: 70,
+                height: 50,
                 decoration: BoxDecoration(
                   color: Color(0xff9775FA),
-                  borderRadius: BorderRadius.circular(50),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
                   child: Text(

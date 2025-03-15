@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:stylish_shop/Verify/signup.dart';
 import 'package:stylish_shop/pages/card.dart';
 import 'package:stylish_shop/pages/favorite.dart';
 import 'package:stylish_shop/pages/homepage.dart';

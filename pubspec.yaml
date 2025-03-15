@@ -20,4 +20,5 @@ dev_dependencies:
 flutter:
   assets:
     - assets/animations/
+    - assets/productimages/
   uses-material-design: true
