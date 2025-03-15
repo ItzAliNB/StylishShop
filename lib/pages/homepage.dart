@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:stylish_shop/Components/cattegorybutton.dart'; // ایمپورت صحیح کامپوننت
+import 'package:stylish_shop/Components/cattegorybutton.dart';
+import 'package:stylish_shop/categorypages/adidas.dart';
+import 'package:stylish_shop/categorypages/fila.dart';
+import 'package:stylish_shop/categorypages/nike.dart';
+import 'package:stylish_shop/categorypages/puma.dart';
 
-class Homepage extends StatelessWidget {
+class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // لیست برندها
-    List<String> brands = [
-      "Adidas",
-      "Nike",
-      "Fila",
-      "Puma",
-    ];
+  _HomepageState createState() => _HomepageState();
+}
 
+class _HomepageState extends State<Homepage> {
+  List<String> brands = ["Adidas", "Nike", "Fila", "Puma"];
+  String selectedBrand = "Adidas";
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffFEFEFE),
       body: Padding(
@@ -84,32 +88,41 @@ class Homepage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Cattegorybutton(
-              icons: [
-                const Icon(
-                  Icons.sports_soccer,
-                  color: Colors.black,
-                ),
-                const Icon(
-                  Icons.sports_basketball,
-                  color: Colors.black,
-                ),
-                const Icon(
-                  Icons.sports_tennis,
-                  color: Colors.black,
-                ),
-                const Icon(
-                  Icons.sports_volleyball,
-                  color: Colors.black,
-                ),
+              icons: const [
+                Icon(Icons.sports_soccer, color: Colors.black),
+                Icon(Icons.sports_basketball, color: Colors.black),
+                Icon(Icons.sports_tennis, color: Colors.black),
+                Icon(Icons.sports_volleyball, color: Colors.black),
               ],
               brands: brands,
               onSelected: (brand) {
-                print("Selected Brand: $brand"); // عملیات هنگام انتخاب برند
+                setState(() {
+                  selectedBrand = brand;
+                });
               },
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: _getProductsForBrand(selectedBrand),
             ),
           ],
         ),
       ),
     );
+  }
+  
+  Widget _getProductsForBrand(String brand) {
+    switch (brand) {
+      case "Adidas":
+        return const Adidas();
+      case "Nike":
+        return const Nike();
+      case "Fila":
+        return const Fila();
+      case "Puma":
+        return const Puma();
+      default:
+        return const SizedBox();
+    }
   }
 }

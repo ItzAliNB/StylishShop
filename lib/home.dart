@@ -19,7 +19,7 @@ class _HomeScreenState extends State<Home> {
     Homepage(),
     Favorite(),
     Order(),
-    Cardpage(), 
+    Cardpage(),
   ];
 
   @override
@@ -30,6 +30,7 @@ class _HomeScreenState extends State<Home> {
         color: const Color(0xff8F959E),
         activeColor: const Color(0xff9775FA),
         selectedIndex: selectedIndex,
+        backgroundColor: const Color(0xffFEFEFE),
         onTabChange: (index) {
           setState(() {
             selectedIndex = index;
