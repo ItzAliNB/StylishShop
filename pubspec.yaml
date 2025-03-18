@@ -22,4 +22,5 @@ flutter:
     - assets/animations/
     - assets/productimages/
     - assets/productbox/
+    - assets/productdetalimages/
   uses-material-design: true

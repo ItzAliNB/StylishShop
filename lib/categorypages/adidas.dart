@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stylish_shop/Components/productsbox.dart';
+import 'package:stylish_shop/imagesClasses/products.dart';
 import 'package:stylish_shop/informationpages/informationAll.dart';
 
 class Adidas extends StatelessWidget {
@@ -7,36 +8,6 @@ class Adidas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> products = [
-      {
-        'title': 'Nike Sportswear Club Fleece',
-        'price': '99 dollar',
-        'image': 'assets/productimages/Rectangle 568.png',
-      },
-      {
-        'title': 'Trail Running Jacket Nike Windrunner',
-        'price': '88 dollar',
-        'image': 'assets/productimages/Rectangle 569.png',
-      },
-      {
-        'title': 'Nike Sportswear Club Fleece',
-        'price': '99 dollar',
-        'image': 'assets/productimages/pngfind 1.png',
-      },
-      {
-        'title': 'Trail Running Jacket Nike Windrunner',
-        'price': '88 dollar',
-        'image': 'assets/productimages/pngegg 1.png',
-      },
-    ];
-
-    final List<String> productImages = [
-      'assets/productbox/image 5.png',
-      'assets/productimages/Rectangle 569.png',
-      'assets/productimages/pngfind 1.png',
-      'assets/productimages/pngegg 1.png',
-    ];
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -49,8 +20,7 @@ class Adidas extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.of(context).push(_createRoute(AllProductsPage(
-                    products: products, productImages: productImages)));
+                Navigator.of(context).push(_createRoute(AllProductsPage()));
               },
               child: Container(
                 margin: const EdgeInsets.only(right: 15),
@@ -65,38 +35,33 @@ class Adidas extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 10),
         Expanded(
-          child: GridView.builder(
-            padding: const EdgeInsets.all(8.0),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10.0,
-              mainAxisSpacing: 10.0,
-              childAspectRatio: 0.65,
+          child: Container(
+            margin: const EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10.0,
+                mainAxisSpacing: 10.0,
+                childAspectRatio: 0.62,
+              ),
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  child: Productsbox(
+                    title: products[index]['title'],
+                    price: products[index]['price'],
+                    image: Image.asset(products[index]['image']),
+                    onpressed: () {
+                      Navigator.of(context).push(
+                        _createRoute(Information()),
+                      );
+                    },
+                  ),
+                );
+              },
             ),
-            itemCount: products.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(_createRoute(
-                    Information(
-                        imagePath: productImages[index]),
-                  ));
-                },
-                child: Productsbox(
-                  title: products[index]['title']!,
-                  price: products[index]['price']!,
-                  image: Image.asset(productImages[index]),
-                  onpressed: () {
-                    Navigator.of(context).push(_createRoute(
-                      Information(
-                          imagePath: productImages[index]),
-                    ));
-                  },
-                ),
-              );
-            },
           ),
         ),
       ],
@@ -105,11 +70,7 @@ class Adidas extends StatelessWidget {
 }
 
 class AllProductsPage extends StatelessWidget {
-  final List<Map<String, dynamic>> products;
-  final List<String> productImages;
-
-  const AllProductsPage(
-      {super.key, required this.products, required this.productImages});
+  const AllProductsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -132,15 +93,10 @@ class AllProductsPage extends StatelessWidget {
           itemCount: products.length,
           itemBuilder: (context, index) {
             return Productsbox(
-              title: products[index]['title']!,
-              price: products[index]['price']!,
-              image: Image.asset(productImages[index]),
-              onpressed: () {
-                Navigator.of(context).push(_createRoute(
-                  Information(
-                      imagePath: productImages[index]),
-                ));
-              },
+              title: products[index]['title'],
+              price: products[index]['price'],
+              image: Image.asset(products[index]['image']),
+              onpressed: () {},
             );
           },
         ),

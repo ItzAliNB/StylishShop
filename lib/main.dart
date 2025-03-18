@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stylish_shop/Verify/signup.dart';
 import 'package:stylish_shop/home.dart';
+import 'package:stylish_shop/informationpages/informationAll.dart';
 
 void main() {
   runApp(const MainApp());

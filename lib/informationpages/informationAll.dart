@@ -1,89 +1,185 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:stylish_shop/Components/sizebox.dart';
 
 class Information extends StatelessWidget {
-  const Information({super.key, required this.imagePath});
-  final String imagePath;
+  const Information({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF2F2F2),
       appBar: AppBar(
-        backgroundColor: Color(0xffF2F2F2),
+        backgroundColor: Colors.transparent,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Center(
-            child: Image.asset(
-              imagePath,
-              height: 300,
+      backgroundColor: Color(0xffF2F2F2),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: Image.asset(
+                'assets/productbox/image 5.png',
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          Expanded(
-            // Use Expanded to ensure space for the DraggableSheet
-            child: DraggableSheetWrapper(child: Column(
-              children: [],
-            )),
-          ),
-        ],
+            SafeArea(child: scroll())
+          ],
+        ),
       ),
     );
   }
 }
 
-class DraggableSheetWrapper extends StatefulWidget {
-  final Widget child;
-  const DraggableSheetWrapper({super.key, required this.child});
-
-  @override
-  State<DraggableSheetWrapper> createState() => _DraggableSheetState();
-}
-
-class _DraggableSheetState extends State<DraggableSheetWrapper> {
-  final sheet = GlobalKey();
-  final controller = DraggableScrollableController();
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (builder, constraints) {
-      return DraggableScrollableSheet(
-        key: sheet,
-        initialChildSize: 0.95,
-        maxChildSize: 0.95,
-        minChildSize: 0.1, // Ensure there's a small initial size
-        expand: false, // Don't let it expand automatically
-        snap: true,
-        snapSizes: [
-          0.1, // Minimum snap size
-          0.5, // Mid snap size
-        ],
-        builder: (BuildContext context, ScrollController scrollcontroller) {
-          return DecoratedBox(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.purple,
-                  blurRadius: 10,
-                  spreadRadius: 1,
-                  offset: Offset(0, 1),
+Widget scroll() {
+  return DraggableScrollableSheet(
+    initialChildSize: 0.55,
+    maxChildSize: 1,
+    minChildSize: 0.55,
+    builder: (context, scrollController) {
+      return Container(
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          color: Color(0xffFEFEFE),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: Center(
+          child: ListView(
+            controller: scrollController,
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 25),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 5,
+                      width: 35,
+                      color: Colors.black12,
+                    )
+                  ],
                 ),
-              ],
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(22), topRight: Radius.circular(22)),
-            ),
-            child: CustomScrollView(
-              controller: scrollcontroller,
-              slivers: [
-                SliverToBoxAdapter(
-                  child: widget.child,
-                )
-              ],
-            ),
-          );
-        },
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Mens Printed Pullover Hoodie',
+                    style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xff8F959E),
+                        fontWeight: FontWeight.w400),
+                  ),
+                  Spacer(),
+                  Text(
+                    'Price',
+                    style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xff8F959E),
+                        fontWeight: FontWeight.w400),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Nike Club Fleece',
+                    style: TextStyle(
+                      fontSize: 22,
+                      color: Color(0xff1D1E20),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Spacer(),
+                  Text(
+                    '99\$',
+                    style: TextStyle(
+                      fontSize: 22,
+                      color: Color(0xff1D1E20),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image.asset('assets/productdetalimages/Rectangle 575.png'),
+                    Image.asset('assets/productdetalimages/Rectangle 576.png'),
+                    Image.asset('assets/productdetalimages/Rectangle 577.png'),
+                    Image.asset('assets/productdetalimages/Rectangle 578.png'),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 20),
+                child: Row(
+                  children: [
+                    Text(
+                      'Size',
+                      style: TextStyle(
+                        fontSize: 17,
+                        color: Color(0xff1D1E20),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Spacer(),
+                    Text(
+                      'Size Guide',
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: Color(0xff8F959E),
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Sizebox(
+                      size: 'S',
+                    ),
+                    Sizebox(
+                      size: 'M',
+                    ),
+                    Sizebox(
+                      size: 'L',
+                    ),
+                    Sizebox(
+                      size: 'XL',
+                    ),
+                    Sizebox(
+                      size: '2XL',
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 15),
+                child: Text('Description',
+                    style: TextStyle(
+                        fontSize: 17,
+                        color: Color(0xff1D1E20),
+                        fontWeight: FontWeight.w600)),
+              ),
+              Text(
+                  'The Nike Throwback Pullover Hoodie is made from premium French terry fabric that blends a performance feel',
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Color(0xff8F959E),
+                      fontWeight: FontWeight.w400)),
+              SizedBox(height: 800),
+            ],
+          ),
+        ),
       );
-    });
-  }
+    },
+  );
 }

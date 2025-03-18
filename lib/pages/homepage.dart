@@ -57,8 +57,8 @@ class _HomepageState extends State<Homepage> {
                             size: 26,
                           ),
                           border: InputBorder.none,
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 12),
                         ),
                       ),
                     ),
@@ -113,7 +113,7 @@ class _HomepageState extends State<Homepage> {
       ),
     );
   }
-  
+
   Widget _getProductsForBrand(String brand) {
     switch (brand) {
       case "Adidas":
