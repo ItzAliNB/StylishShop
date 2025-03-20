@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stylish_shop/home.dart';
-import 'package:stylish_shop/informationpages/informationAll.dart';
+import 'package:stylish_shop/models/shop.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(ChangeNotifierProvider(create: (context) => Shop(),
+  child: const MainApp(),));
 }
 
 class MainApp extends StatelessWidget {

@@ -9,71 +9,79 @@ class Signup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Title Section
             Container(
-              margin: EdgeInsets.only(top: 80),
-              child: Center(
-                child: Column(
-                  children: [
-                    Text(
-                      'Sign Up',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 28),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 100),
-                      child: Column(
-                        children: [
-                          Textinput(
-                            name: 'Username',
-                          ),
-                          Textinput(
-                            name: 'Password',
-                          ),
-                          Textinput(
-                            name: 'Verify Password',
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+              margin: const EdgeInsets.only(top: 50),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: const Text(
+                'Sign Up',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 28,
+                  color: Color(0xff1D1E20),
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Signin()),
-                );
-              },
-              child: Container(
-                  margin: EdgeInsets.only(top: 20),
-                  child: Text(
-                    'alreay have an account? Sign In',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xff8F959E)),
-                  )),
+
+            // Input Fields
+            Container(
+              margin: const EdgeInsets.only(top: 60),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: const [
+                  Textinput(name: 'Username'),
+                  SizedBox(height: 20),
+                  Textinput(name: 'Password'),
+                  SizedBox(height: 20),
+                  Textinput(name: 'Verify Password'),
+                ],
+              ),
             ),
-            Spacer(),
+
+            // Sign In Link
             GestureDetector(
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Gender()),
+                  MaterialPageRoute(builder: (context) => const Signin()),
                 );
               },
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.only(top: 20),
+                alignment: Alignment.center,
+                child: const Text(
+                  'Already have an account? Sign In',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xff8F959E),
+                  ),
+                ),
+              ),
+            ),
+
+            const Spacer(),
+
+            // Sign Up Button
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Gender()),
+                );
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 height: 50,
                 decoration: BoxDecoration(
-                  color: Color(0xff9775FA),
+                  color: const Color(0xff9775FA),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Center(
+                child: const Center(
                   child: Text(
                     'Sign Up',
                     style: TextStyle(
@@ -85,7 +93,7 @@ class Signup extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),

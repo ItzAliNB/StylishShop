@@ -13,7 +13,10 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  // List of available brands
   List<String> brands = ["Adidas", "Nike", "Fila", "Puma"];
+  
+  // Default selected brand
   String selectedBrand = "Adidas";
 
   @override
@@ -21,12 +24,15 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       backgroundColor: const Color(0xffFEFEFE),
       body: SingleChildScrollView(
+        //All Paddings is Here !!!!!!!!!
         child: Padding(
           padding: const EdgeInsets.only(left: 15, right: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
+
+              // User greeting section
               const Text(
                 'Ali Nabavi',
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
@@ -39,8 +45,11 @@ class _HomepageState extends State<Homepage> {
                     color: Color(0xff8F959E)),
               ),
               const SizedBox(height: 15),
+
+              // Search bar and microphone button
               Row(
                 children: [
+                  // Search input field
                   Expanded(
                     child: Container(
                       height: 50,
@@ -63,7 +72,10 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ),
                   ),
+
                   const SizedBox(width: 8),
+
+                  // Microphone icon button
                   Container(
                     width: 50,
                     height: 50,
@@ -72,7 +84,9 @@ class _HomepageState extends State<Homepage> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // TODO: Add microphone functionality
+                      },
                       icon: const Icon(
                         Icons.mic_none,
                         color: Colors.white,
@@ -83,11 +97,15 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
               const SizedBox(height: 15),
+
+              // Brand selection title
               const Text(
                 'Choose brand',
                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
               ),
               const SizedBox(height: 10),
+
+              // Brand selection buttons
               Cattegorybutton(
                 icons: const [
                   Icon(Icons.sports_soccer, color: Colors.black),
@@ -97,15 +115,21 @@ class _HomepageState extends State<Homepage> {
                 ],
                 brands: brands,
                 onSelected: (brand) {
+                  // Update the selected brand when user taps a button
                   setState(() {
                     selectedBrand = brand;
                   });
                 },
               ),
               const SizedBox(height: 20),
+
+              // Display the selected brand's products
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.7,
-                child: _getProductsForBrand(selectedBrand),
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  child: _getProductsForBrand(selectedBrand),
+                ),
               ),
             ],
           ),
@@ -114,6 +138,7 @@ class _HomepageState extends State<Homepage> {
     );
   }
 
+  // Return the corresponding widget based on the selected brand
   Widget _getProductsForBrand(String brand) {
     switch (brand) {
       case "Adidas":
