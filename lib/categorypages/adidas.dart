@@ -56,12 +56,12 @@ class _AdidasState extends State<Adidas> {
         // Product Grid
         Expanded(
           child: GridView.builder(
+            physics: NeverScrollableScrollPhysics(),
             itemCount: productsMenu.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 10.0,
-              mainAxisSpacing: 10.0,
-              childAspectRatio: 0.7,
+              childAspectRatio: 0.68,
             ),
             itemBuilder: (context, index) => Productsbox(
                 products: productsMenu[index],

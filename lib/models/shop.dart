@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stylish_shop/imagesClasses/products.dart';
+import 'package:stylish_shop/products/products.dart';
 
 class Shop extends ChangeNotifier {
   final List<Products> _productsMenu = [
@@ -16,15 +16,34 @@ class Shop extends ChangeNotifier {
             'The Nike Throwback Pullover Hoodie is made from premium French terry fabric that blends a performance feel'),
     Products(
         title: 'Nike Club Fleece',
-        name: 'Trail Running Jacket Nike Windrunner',
+        name: 'Trail Running Jacket',
         price: '99\$',
         imagePath: 'assets/productimages/Rectangle 569.png',
         imagePath1: '',
         imagePath2: '',
         imagePath3: '',
         imagePath4: '',
-        description:
-            'The Nike Throwback Pullover Hoodie is made from premium French terry fabric that blends a performance feel'),
+        description: 'bull shit'),
+    Products(
+        title: 'Training Top Nike',
+        name: 'Training Top Nike',
+        price: '100\$',
+        imagePath: 'assets/productimages/pngfind 1 (1).png',
+        imagePath1: '',
+        imagePath2: '',
+        imagePath3: '',
+        imagePath4: '',
+        description: 'bull shit'),
+    Products(
+        title: 'Trail Running Jacket',
+        name: 'Trail Running Jacket',
+        price: '70\$',
+        imagePath: 'assets/productimages/pngegg 1 (1).png',
+        imagePath1: '',
+        imagePath2: '',
+        imagePath3: '',
+        imagePath4: '',
+        description: 'bull shit'),
   ];
 
   final List<Products> _cart = [];
@@ -33,10 +52,28 @@ class Shop extends ChangeNotifier {
 
   List<Products> get cart => _cart;
 
-  void addToCart(Products productsitem,) {
-      _cart.add(productsitem);
+  void addToCart(
+    Products productsitem,
+  )
+  
+  
+   {
+    _cart.add(productsitem);
     notifyListeners();
   }
+final List<Products> _favorites = [];
+
+List<Products> get favorites => _favorites;
+
+void addToFav(Products product) {
+  _favorites.add(product);
+  notifyListeners();
+}
+
+void removeFromFav(Products product) {
+  _favorites.remove(product);
+  notifyListeners();
+}
 
   void removeFromCart(Products product) {
     _cart.remove(product);

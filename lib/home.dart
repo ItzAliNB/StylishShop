@@ -34,7 +34,8 @@ class _HomeScreenState extends State<Home> {
         color: const Color(0xff8F959E), // Inactive icon color
         activeColor: const Color(0xff9775FA), // Active icon color
         selectedIndex: selectedIndex, // Current selected index
-        backgroundColor: const Color(0xffFEFEFE), // Background color of the nav bar
+        backgroundColor:
+            const Color(0xffFEFEFE), // Background color of the nav bar
         onTabChange: (index) {
           // Update the selected index when tab is changed
           setState(() {
@@ -61,7 +62,12 @@ class _HomeScreenState extends State<Home> {
             child: CircleAvatar(
               backgroundColor: const Color(0xffF5F6FA),
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Order()),
+                  );
+                },
                 icon: const Icon(Icons.shopping_bag_outlined),
                 iconSize: 25,
                 color: const Color(0xff1D1E20),

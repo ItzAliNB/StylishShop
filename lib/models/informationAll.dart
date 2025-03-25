@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
 import 'package:stylish_shop/Components/sizebox.dart';
 import 'package:stylish_shop/home.dart';
-import 'package:stylish_shop/imagesClasses/products.dart';
+import 'package:stylish_shop/products/products.dart';
 import 'package:stylish_shop/models/shop.dart';
 
 class Information extends StatefulWidget {
@@ -15,26 +16,49 @@ class Information extends StatefulWidget {
 }
 
 class _InformationState extends State<Information> {
+  bool isLiked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final shop = context.read<Shop>();
+    isLiked = shop.favorites.contains(widget.products);
+  }
+
   void addToCart() {
     final shop = context.read<Shop>();
-
     shop.addToCart(widget.products);
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Transparent AppBar
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          LikeButton(
+            isLiked: isLiked,
+            onTap: (bool isCurrentlyLiked) async {
+              final shop = context.read<Shop>();
+              setState(() {
+                isLiked = !isCurrentlyLiked;
+              });
+
+              if (isLiked) {
+                shop.addToFav(widget.products);
+              } else {
+                shop.removeFromFav(widget.products);
+              }
+              return isLiked;
+            },
+          )
+        ],
       ),
       backgroundColor: const Color(0xffF2F2F2),
       body: SafeArea(
         child: Stack(
           children: [
-            // Background product image
             SizedBox(
               width: double.infinity,
               child: Image.asset(
@@ -42,7 +66,6 @@ class _InformationState extends State<Information> {
                 fit: BoxFit.cover,
               ),
             ),
-            // Draggable bottom sheet content
             _productDetailSheet(),
           ],
         ),
@@ -50,7 +73,6 @@ class _InformationState extends State<Information> {
     );
   }
 
-  // Widget for the draggable bottom sheet
   Widget _productDetailSheet() {
     return DraggableScrollableSheet(
       initialChildSize: 0.55,
@@ -70,7 +92,6 @@ class _InformationState extends State<Information> {
             controller: scrollController,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             children: [
-              // Top indicator bar
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 25),
                 child: Center(
@@ -81,13 +102,11 @@ class _InformationState extends State<Information> {
                   ),
                 ),
               ),
-
-              // Product category and price label
               Row(
                 children: [
                   Text(
                     widget.products.title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 13,
                       color: Color(0xff8F959E),
                       fontWeight: FontWeight.w400,
@@ -104,23 +123,21 @@ class _InformationState extends State<Information> {
                   ),
                 ],
               ),
-
-              // Product title and price
               const SizedBox(height: 8),
               Row(
                 children: [
                   Text(
                     widget.products.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 22,
                       color: Color(0xff1D1E20),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     widget.products.price,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 22,
                       color: Color(0xff1D1E20),
                       fontWeight: FontWeight.w600,
@@ -128,22 +145,22 @@ class _InformationState extends State<Information> {
                   ),
                 ],
               ),
-
-              // Product images thumbnails
               Container(
                 margin: const EdgeInsets.only(top: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset(widget.products.imagePath1), //we use widget because its stateful widget!
-                    Image.asset(widget.products.imagePath2),
-                    Image.asset(widget.products.imagePath3),
-                    Image.asset(widget.products.imagePath4),
+                    if (widget.products.imagePath1.isNotEmpty)
+                      Image.asset(widget.products.imagePath1),
+                    if (widget.products.imagePath2.isNotEmpty)
+                      Image.asset(widget.products.imagePath2),
+                    if (widget.products.imagePath3.isNotEmpty)
+                      Image.asset(widget.products.imagePath3),
+                    if (widget.products.imagePath4.isNotEmpty)
+                      Image.asset(widget.products.imagePath4),
                   ],
                 ),
               ),
-
-              // Size selector title and guide
               Container(
                 margin: const EdgeInsets.only(top: 20),
                 child: Row(
@@ -168,8 +185,6 @@ class _InformationState extends State<Information> {
                   ],
                 ),
               ),
-
-              // Size options
               Container(
                 margin: const EdgeInsets.only(top: 15),
                 child: Row(
@@ -183,8 +198,6 @@ class _InformationState extends State<Information> {
                   ],
                 ),
               ),
-
-              // Product description
               Container(
                 margin: const EdgeInsets.only(top: 15),
                 child: const Text(
@@ -199,46 +212,34 @@ class _InformationState extends State<Information> {
               const SizedBox(height: 8),
               Text(
                 widget.products.description,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 15,
                   color: Color(0xff8F959E),
                   fontWeight: FontWeight.w400,
                 ),
               ),
-
-              // Add to Cart button
               const SizedBox(height: 20),
               GestureDetector(
-                onTap: () {
-                  // Navigate to Home screen when Add to Cart is tapped
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Home()),
-                  );
-                },
-                child: GestureDetector(
-                  onTap: addToCart,
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: const Color(0xff9775FA),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Add To Cart',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
+                onTap: addToCart,
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: const Color(0xff9775FA),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Add To Cart',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
                       ),
                     ),
                   ),
                 ),
               ),
-
-              const SizedBox(height: 30), // Extra spacing at bottom
+              const SizedBox(height: 30),
             ],
           ),
         );
