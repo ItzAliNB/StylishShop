@@ -18,11 +18,11 @@ class Favorite extends StatelessWidget {
             return Container(
               margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
               decoration: BoxDecoration(
-                color: const Color(0xffF2F2F2),  // اینجا رنگ پس‌زمینه محصول
+                color: const Color(0xffF2F2F2),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
-                tileColor: Colors.transparent,  // چون کانتینر رنگ داره
+                tileColor: Colors.transparent,
                 leading: Image.asset(product.imagePath, width: 50),
                 title: Text(product.name),
                 subtitle: Text(product.price),
